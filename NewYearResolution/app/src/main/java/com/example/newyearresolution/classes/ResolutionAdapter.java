@@ -16,16 +16,18 @@ import java.util.List;
 public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.ViewHolder> {
 
     List<Resolution> resolutions;
+    private int layout;
 
-    public ResolutionAdapter(List<Resolution> resolutions){
+    public ResolutionAdapter(List<Resolution> resolutions,int layout){
         this.resolutions=resolutions;
+        this.layout = layout;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.resolution_layout,parent,false);
+        View view = layoutInflater.inflate(layout,parent,false);
         return new ViewHolder(view);
     }
 
@@ -59,9 +61,6 @@ public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.Vi
                 System.err.println("[FREQUENCE] - "+resolution.getFrequence());
                 frequence.setVisibility(View.VISIBLE);
                 frequence.setText(resolution.getNbOccurence()+" fois par "+resolution.getFrequence().toLowerCase());
-            }else{
-                frequence.setVisibility(View.INVISIBLE);
-
             }
         }
     }

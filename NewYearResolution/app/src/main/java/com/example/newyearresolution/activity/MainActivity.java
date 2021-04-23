@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         //System.err.println(resolutionList.toString());
-                        adapter = new ResolutionAdapter(resolutionList);
+                        adapter = new ResolutionAdapter(resolutionList,R.layout.resolution_main_layout);
 
                         rv.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
 

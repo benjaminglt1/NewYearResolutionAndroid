@@ -74,7 +74,7 @@ public class MyResolutions extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                 }
-                                adapter = new ResolutionAdapter(resolutionList);
+                                adapter = new ResolutionAdapter(resolutionList,R.layout.resolution_layout);
 
                                 rv.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
 
