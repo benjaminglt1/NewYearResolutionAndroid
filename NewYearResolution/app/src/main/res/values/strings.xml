@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NewYearResolution</string>
+    <string name="textview">TextView</string>
+    <string name="sign_in">Sign in</string>
+    <string name="liste_de_toutes_les_r_solutions">Liste de toutes les résolutions</string>
+    <string name="login">Page de connexion</string>
+    <string name="login2">Login</string>
+    <string name="password">Password</string>
+    <string name="se_connecter">Se connecter</string>
+    <string name="ajouter_une_r_solution">Prendre une nouvelle résolution</string>
+    <string name="accueil">Revenir à l\'accueil</string>
+    <string name="sign_out">Sign out</string>
+    <string name="mes_r_solutions">Mes résolutions</string>
+    <string name="button">Prendre cette résolution</string>
+    <string name="mesRes">Liste de mes résolutions</string>
+    <string name="takeReso">Liste des résolutions que je peux prendre</string>
+</resources>
