@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         for(int i=0;i<reponse.length();i++){
                             try {
                                 JSONObject object = (JSONObject) reponse.get(i);
-                                Resolution r = new Resolution(object.getLong("idResolution"),object.getString("action"),object.getString("frequence"),object.getInt("nbOccurence"));
+                                Resolution r = new Resolution(object.getLong("idResolution"),object.getString("action"));
                                 resolutionList.add(r);
                             } catch (JSONException e) {
                                 e.printStackTrace();

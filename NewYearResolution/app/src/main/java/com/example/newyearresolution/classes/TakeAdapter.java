@@ -5,7 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +33,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.AdapterView.*;
+
 
 public class TakeAdapter extends RecyclerView.Adapter<TakeAdapter.ViewHolder>{
 
     List<Resolution> resolutions;
     private long idUser;
     private TakeResolution tr;
+    private String freq;
     private List<Resolution> resolutionList = new ArrayList<Resolution>();
 
     public TakeAdapter(List<Resolution> resolutions, long idUser, TakeResolution tr){
@@ -64,26 +71,42 @@ public class TakeAdapter extends RecyclerView.Adapter<TakeAdapter.ViewHolder>{
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView action;
-        private TextView frequence;
+        private Spinner selectFreq;
+        private EditText nbOccurences;
         private Button take;
         private Resolution r;
         ViewHolder(View itemView){
             super(itemView);
             action = (TextView) itemView.findViewById(R.id.action);
-            frequence = (TextView) itemView.findViewById(R.id.frequence);
+            selectFreq = (Spinner) itemView.findViewById(R.id.selectFreq);
+            nbOccurences = (EditText) itemView.findViewById(R.id.nbOccur);
             take = (Button) itemView.findViewById(R.id.take);
         }
 
         public void display(Resolution resolution) {
             this.r = resolution;
             action.setText(resolution.getAction());
-            frequence.setText(resolution.getNbOccurence()+" fois par "+resolution.getFrequence().toLowerCase());
+            nbOccurences.setText("0");
+            String[] options = new String[]{"JOUR", "SEMAINE", "MOIS", "ANNEE"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(tr, android.R.layout.simple_spinner_dropdown_item, options);
+            selectFreq.setAdapter(adapter);
+            selectFreq.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    freq = (String) adapterView.getItemAtPosition(i);
+                    return;
+                }
+
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    return;
+                }
+            });
+
             take.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     long idRes = r.getIdResolution();
-                    String url = "http://192.168.0.16:8080/takeResolution?idUser="+idUser+"&idResolution="+idRes;
+                    String url = "http://192.168.0.16:8080/takeResolution?idUser="+idUser+"&idResolution="+idRes+"&frequence="+freq+"&nbOccurences="+nbOccurences.getText();
                     RequestQueue queue = Volley.newRequestQueue(tr);
 
                     JsonObjectRequest objectRequest = new JsonObjectRequest(

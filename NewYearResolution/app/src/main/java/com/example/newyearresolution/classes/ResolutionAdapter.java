@@ -54,7 +54,11 @@ public class ResolutionAdapter extends RecyclerView.Adapter<ResolutionAdapter.Vi
 
         public void display(Resolution resolution) {
             action.setText(resolution.getAction());
-            frequence.setText(resolution.getNbOccurence()+" fois par "+resolution.getFrequence().toLowerCase());
+            if(resolution.getFrequence() != null){
+                frequence.setVisibility(View.VISIBLE);
+                frequence.setText(resolution.getNbOccurence()+" fois par "+resolution.getFrequence().toLowerCase());
+            }
+            frequence.setVisibility(View.INVISIBLE);
         }
     }
 }

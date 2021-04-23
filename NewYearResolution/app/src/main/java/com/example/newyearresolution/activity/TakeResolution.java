@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TakeResolution extends AppCompatActivity {
+public class TakeResolution extends AppCompatActivity{
     private long idUser;
     private List<Resolution> resolutionList = new ArrayList<Resolution>();
     private TakeAdapter adapter;
@@ -58,7 +60,7 @@ public class TakeResolution extends AppCompatActivity {
                                 for(int i=0;i<reponse.length();i++){
                                     try {
                                         JSONObject object = (JSONObject) reponse.get(i);
-                                        Resolution r = new Resolution(object.getLong("idResolution"),object.getString("action"),object.getString("frequence"),object.getInt("nbOccurence"));
+                                        Resolution r = new Resolution(object.getLong("idResolution"),object.getString("action"));
                                         resolutionList.add(r);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -83,4 +85,5 @@ public class TakeResolution extends AppCompatActivity {
             }
         }
     }
+
 }
