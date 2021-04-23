@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,6 +32,10 @@ public class TakeResolution extends AppCompatActivity{
     private List<Resolution> resolutionList = new ArrayList<Resolution>();
     private TakeAdapter adapter;
     private RecyclerView rv;
+    private Button retour;
+    private Button newRes;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class TakeResolution extends AppCompatActivity{
         setContentView(R.layout.activity_take_resolution);
 
         rv = (RecyclerView) findViewById(R.id.rv);
+
+
 
         Intent i = getIntent();
         if(i!=null){
@@ -79,9 +85,34 @@ public class TakeResolution extends AppCompatActivity{
                                 Log.e("Erreur=",err.toString());
                             }
                         }
-                );
 
+                );
                 queue.add(objectRequest);
+
+                retour = (Button) findViewById(R.id.retour2);
+                retour.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(TakeResolution.this,MyResolutions.class);
+                        intent.putExtra("idUser",idUser);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+
+                newRes = (Button) findViewById(R.id.button2);
+                newRes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(TakeResolution.this,TakeNewResolution.class);
+                        intent.putExtra("idUser",idUser);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+
             }
         }
     }

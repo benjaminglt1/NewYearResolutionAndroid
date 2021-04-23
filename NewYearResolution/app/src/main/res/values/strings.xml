@@ -13,5 +13,10 @@
     <string name="mes_r_solutions">Mes résolutions</string>
     <string name="button">Prendre cette résolution</string>
     <string name="mesRes">Liste de mes résolutions</string>
-    <string name="takeReso">Liste des résolutions que je peux prendre</string>
+    <string name="takeReso1">Ajouter une nouvelle résolution</string>
+    <string name="takeReso">Liste des résolutions existantes</string>
+    <string name="retour">Retour</string>
+    <string name="action_faire">Action à faire</string>
+    <string name="fois_par">fois par</string>
+    <string name="ajouter_une_nouvelle_r_solution">Ajouter une nouvelle résolution</string>
 </resources>
