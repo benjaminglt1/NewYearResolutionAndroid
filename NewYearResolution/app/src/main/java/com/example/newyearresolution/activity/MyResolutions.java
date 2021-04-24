@@ -19,11 +19,13 @@ import com.android.volley.toolbox.Volley;
 import com.example.newyearresolution.R;
 import com.example.newyearresolution.classes.Resolution;
 import com.example.newyearresolution.classes.ResolutionAdapter;
+import com.example.newyearresolution.classes.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,12 @@ public class MyResolutions extends AppCompatActivity {
 
             if (intent.hasExtra("idUser")){
                 idUser = intent.getLongExtra("idUser",0);
-                String url = "http://192.168.0.16:8080/getResolutionsOfUser?idUser="+idUser;
+                String url = null;
+                try {
+                    url = Util.getProperty("method",getApplicationContext())+"://"+Util.getProperty("apiUrl",getApplicationContext())+"/getResolutionsOfUser?idUser="+idUser;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
                 RequestQueue queue = Volley.newRequestQueue(this);
@@ -74,7 +81,7 @@ public class MyResolutions extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                 }
-                                adapter = new ResolutionAdapter(resolutionList);
+                                adapter = new ResolutionAdapter(resolutionList,R.layout.resolution_layout);
 
                                 rv.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
 

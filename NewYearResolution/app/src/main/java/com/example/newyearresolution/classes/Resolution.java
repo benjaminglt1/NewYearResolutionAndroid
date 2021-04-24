@@ -16,6 +16,13 @@ public class Resolution {
         this.idResolution=idResolution;
     }
 
+    public Resolution(Long idResolution, String action) {
+        this.idResolution = idResolution;
+        this.action = action;
+        this.frequence=null;
+        this.nbOccurence=0;
+    }
+
     public String getFrequence() {
         return frequence;
     }
