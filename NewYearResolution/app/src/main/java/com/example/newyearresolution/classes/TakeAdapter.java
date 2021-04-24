@@ -30,6 +30,7 @@ import com.example.newyearresolution.activity.TakeResolution;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,7 +107,12 @@ public class TakeAdapter extends RecyclerView.Adapter<TakeAdapter.ViewHolder>{
                 @Override
                 public void onClick(View v) {
                     long idRes = r.getIdResolution();
-                    String url = "http://192.168.0.16:8080/takeResolution?idUser="+idUser+"&idResolution="+idRes+"&frequence="+freq+"&nbOccurences="+nbOccurences.getText();
+                    String url = null;
+                    try {
+                        url = Util.getProperty("method",tr.getApplicationContext())+"://"+Util.getProperty("apiUrl",tr.getApplicationContext())+"/takeResolution?idUser="+idUser+"&idResolution="+idRes+"&frequence="+freq+"&nbOccurences="+nbOccurences.getText();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     RequestQueue queue = Volley.newRequestQueue(tr);
 
                     JsonObjectRequest objectRequest = new JsonObjectRequest(

@@ -20,11 +20,13 @@ import com.android.volley.toolbox.Volley;
 import com.example.newyearresolution.R;
 import com.example.newyearresolution.classes.Resolution;
 import com.example.newyearresolution.classes.ResolutionAdapter;
+import com.example.newyearresolution.classes.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,10 +52,12 @@ public class MainActivity extends AppCompatActivity {
         mesRes = (Button) findViewById(R.id.mesRes);
 
 
-
-
-
-        String url = "http://192.168.0.16:8080/getResolutions";
+        String url = null;
+        try {
+            url = Util.getProperty("method",getApplicationContext())+"://"+Util.getProperty("apiUrl",getApplicationContext())+"/getResolutions";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

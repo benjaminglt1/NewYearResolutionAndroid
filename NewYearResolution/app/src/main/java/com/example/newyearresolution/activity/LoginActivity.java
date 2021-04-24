@@ -17,9 +17,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.newyearresolution.R;
+import com.example.newyearresolution.classes.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,7 +47,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String url = "http://192.168.0.16:8080/connectUser?login="+login.getText().toString()+"&pass="+password.getText().toString();
+                String url = null;
+                try {
+                    url = Util.getProperty("method",getApplicationContext())+"://"+Util.getProperty("apiUrl",getApplicationContext())+"/connectUser?login="+login.getText().toString()+"&pass="+password.getText().toString();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
 
                 JsonObjectRequest objectRequest = new JsonObjectRequest(
                         Request.Method.GET,

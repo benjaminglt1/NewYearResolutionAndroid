@@ -20,9 +20,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.newyearresolution.R;
+import com.example.newyearresolution.classes.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class TakeNewResolution extends AppCompatActivity {
     private EditText action;
@@ -82,7 +85,12 @@ public class TakeNewResolution extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         String strAction = action.getText().toString().replace(" ","_");
-                        String url = "http://192.168.0.16:8080/takeNewResolution?idUser="+idUser+"&action="+strAction+"&frequence="+freq+"&nbOccurences="+nbOccurences.getText();
+                        String url = null;
+                        try {
+                            url = Util.getProperty("method",getApplicationContext())+"://"+Util.getProperty("apiUrl",getApplicationContext())+"/takeNewResolution?idUser="+idUser+"&action="+strAction+"&frequence="+freq+"&nbOccurences="+nbOccurences.getText();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         RequestQueue queue = Volley.newRequestQueue(TakeNewResolution.this);
 
                         JsonObjectRequest objectRequest = new JsonObjectRequest(

@@ -19,11 +19,13 @@ import com.android.volley.toolbox.Volley;
 import com.example.newyearresolution.R;
 import com.example.newyearresolution.classes.Resolution;
 import com.example.newyearresolution.classes.TakeAdapter;
+import com.example.newyearresolution.classes.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +52,12 @@ public class TakeResolution extends AppCompatActivity{
         if(i!=null){
             if(i.hasExtra("idUser")){
                 idUser = i.getLongExtra("idUser",0);
-                String url = "http://192.168.0.16:8080/getNotResolutions?idUser="+idUser;
+                String url = null;
+                try {
+                    url = Util.getProperty("method",getApplicationContext())+"://"+Util.getProperty("apiUrl",getApplicationContext())+"/getNotResolutions?idUser="+idUser;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
                 RequestQueue queue = Volley.newRequestQueue(this);
